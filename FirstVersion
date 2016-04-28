@@ -1,8 +1,7 @@
-import java.util.*;
+import java.math.BigInteger;
+        import java.util.*;
 
-/**
- * Created by SoftUni on 23.4.2016 г..
- */
+
 public class CriticalBreakpoint {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -21,7 +20,6 @@ public class CriticalBreakpoint {
             points.clear();
         }
 
-        //Collections.sort(critRatio);
         System.out.println(breakPoints(critRatio, result));
     }
 
@@ -45,16 +43,22 @@ public class CriticalBreakpoint {
         }
 
         for (int i=0; i<critRatio.size(); i++){
-            if ((critRatio.get(i) != 0) && (critRatio.get(i) != temp)){
+            if ((critRatio.get(i) != 0) && (!Objects.equals(critRatio.get(i), temp))){
                 return "Critical breakpoint does not exist.";
             }
         }
 
+        BigInteger bi1, bi2;
+
+        int exponent = critRatio.size();
+
+        bi1 = new BigInteger(temp.toString());
+
+        bi2 = bi1.pow(exponent);
+
         System.out.print(result);
 
-        int temp2 = (int)Math.pow(temp, critRatio.size());
-        int breakPoint = temp2%critRatio.size();
-        return "Critical Breakpoint: " + breakPoint;
+        return "Critical Breakpoint: " + bi2.mod(new BigInteger(Integer.toString(critRatio.size())));
 
     }
 }
