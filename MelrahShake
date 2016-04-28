@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+/**
+ * Created by HPpro on 28/04/2016 г..
+ */
+public class MelrahShake {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        StringBuilder input = new StringBuilder(scan.nextLine());
+        StringBuilder pattern = new StringBuilder(scan.nextLine());
+        int x = 0;
+
+        while (pattern.length() > 0){
+            if (input.toString().contains(pattern)){
+                input.delete(input.toString().indexOf(pattern.toString()), input.toString().indexOf(pattern.toString()) + pattern.length());
+                if (input.toString().contains(pattern)) {
+                    input.delete(input.lastIndexOf(pattern.toString()), input.toString().lastIndexOf(pattern.toString()) + pattern.length());
+                    System.out.println("Shaked it.");
+                }
+            } else{
+                        System.out.println("No shake.");
+                        x = 1;
+                        break;
+            }
+
+            pattern.delete(pattern.length()/2, pattern.length()/2 + 1);
+
+        }
+
+        if (pattern.length() == 0){
+            System.out.println("No shake.");
+        }
+        System.out.println(input.toString());
+    }
+}
